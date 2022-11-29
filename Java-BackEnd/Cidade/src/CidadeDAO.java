@@ -10,7 +10,7 @@ public class CidadeDAO {
     }
 
     public boolean insereCidade(Cidade cidade){
-        String sql = "INSERT INTO Cidade.cidade(ddd, nome, nro_habitantes, renda_per_capita, capital, estado, nome_prefeito)"+
+        String sql = "INSERT INTO cidade.cidade(ddd, nome, nro_habitantes, renda_per_capita, capital, estado, nome_prefeito)"+
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement stmt;
