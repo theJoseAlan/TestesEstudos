@@ -1,4 +1,4 @@
-public class Cidade {
+public class CidadePOJO {
     private int ddd;
     private String nome;
 
@@ -8,7 +8,7 @@ public class Cidade {
     private String estado;
     private String nome_prefeito;
 
-    public Cidade(int ddd, String nome, int nro_habitantes, double renda_per_capita, boolean capital, String estado, String nome_prefeito) {
+    public CidadePOJO(int ddd, String nome, int nro_habitantes, double renda_per_capita, boolean capital, String estado, String nome_prefeito) {
         this.ddd = ddd;
         this.nome = nome;
         this.nro_habitantes = nro_habitantes;
