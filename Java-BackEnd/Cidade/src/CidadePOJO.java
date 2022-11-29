@@ -18,6 +18,10 @@ public class CidadePOJO {
         this.nome_prefeito = nome_prefeito;
     }
 
+    public CidadePOJO() {
+
+    }
+
     public int getDdd() {
         return ddd;
     }
@@ -72,5 +76,12 @@ public class CidadePOJO {
 
     public void setNome_prefeito(String nome_prefeito) {
         this.nome_prefeito = nome_prefeito;
+    }
+
+    @Override
+    public String toString() {
+        return "DDD: " + ddd + "\nNOME: " + nome +"\nN. HABITANTES: " + nro_habitantes +
+                "\nRENDA PER CAPITA: " + renda_per_capita +"\nCAPITAL: " + capital +
+                "\nESTADO: " + estado +"\nPREFEITO: " + nome_prefeito;
     }
 }

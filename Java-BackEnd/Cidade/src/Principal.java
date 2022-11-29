@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 public class Principal {
     //Metodo para remoção de cidade
@@ -40,7 +41,7 @@ public class Principal {
         int op=0;
 
         do {
-            System.out.print("1 - ADD cidade\n2 - Remover cidade\n-1 - Sair\nR: ");
+            System.out.print("1 - ADD cidade\n2 - Remover cidade\n3 - Exibir cidade \n-1 - Sair\nR: ");
             op = input.nextInt();
 
             if(op==1){
@@ -49,6 +50,14 @@ public class Principal {
 
             } else if (op==2) {
                 remocao(input, cidadeDao);
+            } else if (op==3) {
+                List<CidadePOJO> cidadesnoBd = cidadeDao.listaCidades();
+                for(CidadePOJO cidadePOJO : cidadesnoBd){
+                    System.out.println("=-=-=-=-=-=-=-=-=-=-=-");
+                    System.out.println(cidadePOJO);
+
+                }
+                System.out.println("=-=-=-=-=-=-=-=-=-=-=-");
             }
 
         }while (op!=-1);

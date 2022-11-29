@@ -1,6 +1,9 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CidadeDAO {
     private Connection conn;
@@ -48,6 +51,36 @@ public class CidadeDAO {
             return false;
         }
         return true;
+    }
+
+    public List<CidadePOJO> listaCidades(){
+        String sql = "SELECT * FROM cidade.cidade";
+        List<CidadePOJO> listaRetornada = new ArrayList<>();
+
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+                CidadePOJO cidadeRetornada = new CidadePOJO();
+
+                cidadeRetornada.setDdd(rs.getInt("ddd"));
+                cidadeRetornada.setNome(rs.getString("nome"));
+                cidadeRetornada.setNro_habitantes(rs.getInt("nro_habitantes"));
+                cidadeRetornada.setRenda_per_capita(rs.getDouble("renda_per_capita"));
+                cidadeRetornada.setCapital(rs.getBoolean("capital"));
+                cidadeRetornada.setEstado(rs.getString("estado"));
+                cidadeRetornada.setNome_prefeito(rs.getString("nome_prefeito"));
+
+                listaRetornada.add(cidadeRetornada);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar cidades!");
+            System.err.println(e.getMessage());
+        }
+
+        return listaRetornada;
     }
 
 }
