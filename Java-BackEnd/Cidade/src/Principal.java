@@ -28,8 +28,8 @@ public class Principal {
         System.out.print("PREFEITO: ");
         String prefeito = input.nextLine();
 
-        CidadePOJO cidadePOJOAserInserida = new CidadePOJO(ddd,nome,nro_habitantes,renda_per_capita,capital,estado,prefeito);
-        cidadeDao.insereCidade(cidadePOJOAserInserida);
+        CidadePOJO cidadeAserInserida = new CidadePOJO(ddd,nome,nro_habitantes,renda_per_capita,capital,estado,prefeito);
+        cidadeDao.insereCidade(cidadeAserInserida);
     }
 
 
@@ -41,7 +41,7 @@ public class Principal {
         int op=0;
 
         do {
-            System.out.print("1 - ADD cidade\n2 - Remover cidade\n3 - Exibir cidade \n-1 - Sair\nR: ");
+            System.out.print("1 - ADD cidade\n2 - Remover cidade\n3 - Exibir todas as cidades \n-1 - Sair\nR: ");
             op = input.nextInt();
 
             if(op==1){
@@ -52,9 +52,9 @@ public class Principal {
                 remocao(input, cidadeDao);
             } else if (op==3) {
                 List<CidadePOJO> cidadesnoBd = cidadeDao.listaCidades();
-                for(CidadePOJO cidadePOJO : cidadesnoBd){
+                for(CidadePOJO cidade : cidadesnoBd){
                     System.out.println("=-=-=-=-=-=-=-=-=-=-=-");
-                    System.out.println(cidadePOJO);
+                    System.out.println(cidade);
 
                 }
                 System.out.println("=-=-=-=-=-=-=-=-=-=-=-");

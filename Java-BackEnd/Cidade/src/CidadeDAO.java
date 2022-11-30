@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CidadeDAO {
     private Connection conn;
@@ -61,9 +62,28 @@ public class CidadeDAO {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()){
-                CidadePOJO cidadeRetornada = new CidadePOJO();
+            populaLista(listaRetornada, rs);
 
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar cidades!");
+            System.err.println(e.getMessage());
+        }
+
+        return listaRetornada;
+    }
+
+    public CidadePOJO consultacidade(int ddd){
+        String sql = "SELECT * FROM cidade.cidade WHERE ddd=?";
+
+        PreparedStatement stmt;
+
+        try {
+            stmt = this.conn.prepareStatement(sql);
+            stmt.setInt(1, ddd);
+            ResultSet rs = stmt.executeQuery(); //Objeto que contem os resultados da consulta
+
+            if (rs.next()){//Se retornar, é porque achei um registro na tabela, no caso o que quero
+                CidadePOJO cidadeRetornada = new CidadePOJO();
                 cidadeRetornada.setDdd(rs.getInt("ddd"));
                 cidadeRetornada.setNome(rs.getString("nome"));
                 cidadeRetornada.setNro_habitantes(rs.getInt("nro_habitantes"));
@@ -72,15 +92,109 @@ public class CidadeDAO {
                 cidadeRetornada.setEstado(rs.getString("estado"));
                 cidadeRetornada.setNome_prefeito(rs.getString("nome_prefeito"));
 
-                listaRetornada.add(cidadeRetornada);
+                return cidadeRetornada;
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao listar cidades!");
+            System.out.println("Erro ao consultar cidade!");
             System.err.println(e.getMessage());
         }
 
-        return listaRetornada;
+        return null;
+    }
+
+    public List<CidadePOJO> listaCidadesQueComecamCom(String inicio){
+        List<CidadePOJO> cidades = new ArrayList<CidadePOJO>();
+        String sql = "SELECT * FROM cidade.cidade WHERE = ?";
+
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setString(1,inicio+"%");// % Indica que começa com a String digitada e termine
+                                                        // com qualquer coisa, senão ele procura a variável em todas
+                                                        //as Strings
+            ResultSet rs = stmt.executeQuery();
+            populaLista(cidades, rs);
+        }catch (SQLException e){
+            System.err.println("Erro ao listar cidades que começam com "+inicio);
+            System.err.println(e.getMessage());
+        }
+        return cidades;
+    }
+
+    public  List<CidadePOJO> listaCidadePorEstado(String estado){
+        List<CidadePOJO> cidades = new ArrayList<CidadePOJO>();
+        String sql = "SELECT * FROM cidade.cidade WHERE estado = ?";
+
+        PreparedStatement stmt;
+        try {
+            stmt = this.conn.prepareStatement(sql);
+            stmt.setString(1, estado);
+            ResultSet rs = stmt.executeQuery();
+            populaLista(cidades, rs);
+
+        }catch (SQLException e){
+            System.err.println("Erro ao listar cidades do estado com "+estado);
+            System.err.println(e.getMessage());
+        }
+        return cidades;
+    }
+
+    public int contaCidadesPorEstado(String estado){
+        String sql = "SELECT COUNT(*) as contagem FROM cidade.cidades WHERE estado = ?";
+        PreparedStatement stmt;
+
+        try{
+            stmt = this.conn.prepareStatement(sql);
+            stmt.setString(1, estado);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+            return rs.getInt("contagem");
+
+        }catch (SQLException e){
+            System.err.println("Erro ao contar cidades do estado com "+estado);
+            System.err.println(e.getMessage());
+        }
+        return 0;
+    }
+
+    public List<CidadePOJO> listaCidadesFiltradasPOrCapital(boolean ehCapital){
+        List <CidadePOJO> cidades = new ArrayList<CidadePOJO>();
+        String sql = "SELECT * FROM cidade.cidade WHERE capital is ?";
+        PreparedStatement stmt;
+
+        try {
+            stmt = this.conn.prepareStatement(sql);
+            stmt.setBoolean(1, ehCapital);
+            ResultSet rs = stmt.executeQuery();
+
+            populaLista(cidades, rs);
+
+        }catch (SQLException e){
+            System.err.println("Erro ao listar cidades pela coluna capital ");
+            System.err.println(e.getMessage());
+        }
+
+
+        return cidades;
+    }
+
+
+    //Método de listagem, pra não ficar repetindo código
+    private static void populaLista(List<CidadePOJO> listaRetornada, ResultSet rs) throws SQLException {
+        while (rs.next()){
+            CidadePOJO cidadeRetornada = new CidadePOJO();
+
+            cidadeRetornada.setDdd(rs.getInt("ddd"));
+            cidadeRetornada.setNome(rs.getString("nome"));
+            cidadeRetornada.setNro_habitantes(rs.getInt("nro_habitantes"));
+            cidadeRetornada.setRenda_per_capita(rs.getDouble("renda_per_capita"));
+            cidadeRetornada.setCapital(rs.getBoolean("capital"));
+            cidadeRetornada.setEstado(rs.getString("estado"));
+            cidadeRetornada.setNome_prefeito(rs.getString("nome_prefeito"));
+
+            listaRetornada.add(cidadeRetornada);
+        }
     }
 
 }
