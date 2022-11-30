@@ -171,7 +171,7 @@ public class CidadeDAO {
             populaLista(cidades, rs);
 
         }catch (SQLException e){
-            System.err.println("Erro ao listar cidades pela coluna capital ");
+            System.err.println("Erro ao listar cidades pela coluna capital");
             System.err.println(e.getMessage());
         }
 
