@@ -31,7 +31,6 @@ public class Programa {
 		
 		teclado.close();
 		
-		
 	}
 
 }
