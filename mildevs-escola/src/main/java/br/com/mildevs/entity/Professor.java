@@ -1,8 +1,8 @@
 package br.com.mildevs.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Professor {
@@ -18,13 +18,25 @@ public class Professor {
     private String telefone;
 
     @Column(name = "nivel_graduacao", nullable = false)
-    private String nivelGraduacao;
+    private String nivelGraduacao = "MESTRADO";
 
     @Column(nullable = false)
     private double salario;
 
     @Column(nullable = false)
     private String disciplina;
+
+    @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
+    private List<Turma> turmas;
+
+
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
+    }
 
     public int getCodFuncionario() {
         return codFuncionario;
