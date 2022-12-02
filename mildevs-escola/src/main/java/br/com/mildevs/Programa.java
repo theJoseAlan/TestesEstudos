@@ -31,8 +31,8 @@ public class Programa {
         turma.setCodTurma(1);
 
         List<Turma> turmasDoAlan = new ArrayList<>();
+        turma.setProfessor(professor);
         turmasDoAlan.add(turma);
-
         professor.setTurmas(turmasDoAlan);
 
         manager.getTransaction().begin();
