@@ -8,6 +8,7 @@ import java.util.List;
 public class Professor {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Gera o valor automaticamente (Serial)
     @Column(name = "cod_funcionario")
     private int codFuncionario;
 
@@ -84,5 +85,12 @@ public class Professor {
 
     public void setDisciplina(String disciplina) {
         this.disciplina = disciplina;
+    }
+
+    @Override
+    public String toString() {
+        return "Cod.Fun = "+codFuncionario+" Nome = "+nome+" Telefone = "+telefone+
+                " Nivel Graduacao = " +nivelGraduacao+" Salario = " +salario+" Disciplina = "
+                +disciplina+ " Turmas=" + turmas+"\n";
     }
 }

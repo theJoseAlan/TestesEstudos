@@ -8,6 +8,7 @@ import java.util.List;
 public class Turma {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Gera o valor automaticamente (Serial)
     @Column(name = "cod_turma")
     private int codTurma;
 
@@ -19,7 +20,7 @@ public class Turma {
     private List<Aluno> alunos;
 
 
-    @OneToOne(mappedBy = "turma")
+    @OneToOne(mappedBy = "turma", cascade = CascadeType.ALL)
     private Sala sala;
     public Professor getProfessor() {
         return professor;
@@ -35,5 +36,21 @@ public class Turma {
 
     public void setCodTurma(int codTurma) {
         this.codTurma = codTurma;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
+    public Sala getSala() {
+        return sala;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
     }
 }

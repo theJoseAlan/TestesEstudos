@@ -10,6 +10,7 @@ import java.util.List;
 public class Aluno {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Gera o valor automaticamente (Serial)
     private int matricula;
 
     @Column(nullable = false)
@@ -66,5 +67,11 @@ public class Aluno {
 
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    @Override
+    public String toString() {
+        return "Aluno -> Matricula = " + matricula +" Nome = " + nome + " Serie = " + serie +
+                " D.Nas = " + dataNascimento +" Turmas=" + turmas+"\n";
     }
 }

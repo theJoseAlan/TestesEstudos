@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 public class Sala {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Gera o valor automaticamente (Serial)
     @Column(name = "nro_sala", nullable = false)
     private int nroSala;
 
@@ -18,7 +19,7 @@ public class Sala {
     @Column(nullable = false)
     private double altura;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "turma_fk", referencedColumnName = "cod_turma")
     private Turma turma;
 

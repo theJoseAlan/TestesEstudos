@@ -1,22 +1,22 @@
 package br.com.mildevs;
 
-import br.com.mildevs.entity.Sala;
-import br.com.mildevs.entity.Aluno;
+import br.com.mildevs.dao.AlunoDAO;
+import br.com.mildevs.dao.ProfessorDAO;
+import br.com.mildevs.dao.TurmaDAO;
 import br.com.mildevs.entity.Professor;
+import br.com.mildevs.entity.Sala;
 import br.com.mildevs.entity.Turma;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Programa {
     public static void main(String[] args) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("escola");
 
-        EntityManager manager = entityManagerFactory.createEntityManager();
+
+        ProfessorDAO professorDAO = new ProfessorDAO();
+        TurmaDAO turmaDAO = new TurmaDAO();
+        AlunoDAO alunoDAO = new AlunoDAO();
 
         Professor professor = new Professor();
         professor.setCodFuncionario(1);
@@ -26,21 +26,24 @@ public class Programa {
         professor.setSalario(2000);
         professor.setTelefone("1234567890");
 
+        //professorDAO.criaProfessor(professor);
 
-        Turma turma = new Turma();
-        turma.setCodTurma(1);
+        Professor professorDb = professorDAO.concultaProfessor(1);
+        System.out.println("Professor encontrado -> ");
+        List<Professor> professoresNoDb = professorDAO.listaProfessores();
 
-        List<Turma> turmasDoAlan = new ArrayList<>();
-        turma.setProfessor(professor);
-        turmasDoAlan.add(turma);
-        professor.setTurmas(turmasDoAlan);
+        for(Professor professorEncontradoNaListagem : professoresNoDb){
+            System.out.println(professorEncontradoNaListagem);
+        }
 
-        manager.getTransaction().begin();
-        manager.persist(professor);
-        manager.getTransaction().commit();
+        Sala sala = new Sala();
+        sala.setAltura(10);
+        sala.setComprimento(15);
+        sala.setLargura(345);
 
-        manager.close();
-        entityManagerFactory.close();
+        Turma turmaCriada = turmaDAO.criaTurma(sala);
+
+        turmaDAO.adcionaProfessor(professorDb,turmaCriada.getCodTurma());
 
     }
 }
