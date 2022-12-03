@@ -9,6 +9,7 @@
         <!-- Classe referente a entidade -->
         <class>br.com.mildevs.entity.Turma</class>
         <class>br.com.mildevs.entity.Professor</class>
+
         <properties>
             <property name="jakarta.persistence.jdbc.driver"
                       value="org.postgresql.Driver" />
