@@ -72,6 +72,6 @@ public class Aluno {
     @Override
     public String toString() {
         return "Aluno -> Matricula = " + matricula +" Nome = " + nome + " Serie = " + serie +
-                " D.Nas = " + dataNascimento +" Turmas=" + turmas+"\n";
+                " D.Nas = " + dataNascimento +/*" Turmas=" + turmas+*/"\n";
     }
 }

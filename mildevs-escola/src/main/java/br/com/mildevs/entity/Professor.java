@@ -91,6 +91,6 @@ public class Professor {
     public String toString() {
         return "Cod.Fun = "+codFuncionario+" Nome = "+nome+" Telefone = "+telefone+
                 " Nivel Graduacao = " +nivelGraduacao+" Salario = " +salario+" Disciplina = "
-                +disciplina+ " Turmas=" + turmas+"\n";
+                +disciplina+/* " Turmas=" + turmas+*/"\n";
     }
 }

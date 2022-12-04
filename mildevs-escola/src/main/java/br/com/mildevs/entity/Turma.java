@@ -16,7 +16,7 @@ public class Turma {
     @JoinColumn(name = "cod_funcionario_fk", referencedColumnName = "cod_funcionario")//Indica a relação, tipo o que une uma entidade a outra
     private Professor professor;
 
-    @ManyToMany(mappedBy = "turmas")
+    @ManyToMany(mappedBy = "turmas", cascade = CascadeType.ALL)
     private List<Aluno> alunos;
 
 
@@ -52,5 +52,11 @@ public class Turma {
 
     public void setSala(Sala sala) {
         this.sala = sala;
+    }
+
+    @Override
+    public String toString() {
+        return "Turma [codTurma=" + codTurma + ", getProfessor()=" + getProfessor() + ", getAlunos()=" + getAlunos()
+                + ", getSala()=" + getSala() + "]\n";
     }
 }

@@ -8,6 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TurmaDAO {
@@ -59,8 +60,21 @@ public class TurmaDAO {
         }
 
         List<Aluno> alunosTurma = turma.getAlunos();
+
+        if (alunosTurma==null){
+            alunosTurma = new ArrayList<Aluno>();
+        }
+
         alunosTurma.add(aluno);
         turma.setAlunos(alunosTurma);
+
+        List<Turma> turmasAluno = aluno.getTurmas();
+
+        if(turmasAluno==null){
+            turmasAluno = new ArrayList<Turma>();
+        }
+        turmasAluno.add(turma);
+        aluno.setTurmas(turmasAluno);
 
         this.manager.getTransaction().begin();
         this.manager.merge(turma);
