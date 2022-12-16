@@ -4,9 +4,7 @@ import br.com.mildevs.entity.Professor;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
-import org.hibernate.transform.RootEntityResultTransformer;
 
-import javax.print.DocFlavor;
 import java.util.List;
 
 public class ProfessorDAO {
@@ -26,7 +24,7 @@ public class ProfessorDAO {
         return true;
     }
     //Consulta
-    public Professor concultaProfessor(int codFuncionario){
+    public Professor consultaProfessor(int codFuncionario){
         return this.manager.find(Professor.class, codFuncionario);
     }
 

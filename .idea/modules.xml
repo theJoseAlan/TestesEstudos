@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/Java-BackEnd/Java-BackEnd.iml" filepath="$PROJECT_DIR$/Java-BackEnd/Java-BackEnd.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaJDBC/JavaJDBC.iml" filepath="$PROJECT_DIR$/JavaJDBC/JavaJDBC.iml" />
       <module fileurl="file://$PROJECT_DIR$/MineCRUDjdbc/MineCRUDjdbc.iml" filepath="$PROJECT_DIR$/MineCRUDjdbc/MineCRUDjdbc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProjetoMaven.iml" filepath="$PROJECT_DIR$/ProjetoMaven.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/TestesEstudos.iml" filepath="$PROJECT_DIR$/.idea/TestesEstudos.iml" />
     </modules>
   </component>

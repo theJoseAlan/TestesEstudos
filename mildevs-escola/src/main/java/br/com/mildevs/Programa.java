@@ -9,7 +9,6 @@ import br.com.mildevs.entity.Sala;
 import br.com.mildevs.entity.Turma;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Programa {
@@ -27,7 +26,7 @@ public class Programa {
         professor.setTelefone("1234567890");
         professorDAO.criaProfessor(professor);
 
-        Professor professorDb = professorDAO.concultaProfessor(1);
+        Professor professorDb = professorDAO.consultaProfessor(1);
         System.out.println("Professor encontrado -> ");
 
         List<Professor> professoresNoDb = professorDAO.listaProfessores();
