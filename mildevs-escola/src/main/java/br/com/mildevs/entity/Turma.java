@@ -12,15 +12,15 @@ public class Turma {
     @Column(name = "cod_turma")
     private int codTurma;
 
-    @ManyToOne //Muitas turmas para um professor
+    @ManyToOne (fetch = FetchType.EAGER)//Muitas turmas para um professor
     @JoinColumn(name = "cod_funcionario_fk", referencedColumnName = "cod_funcionario")//Indica a relação, tipo o que une uma entidade a outra
     private Professor professor;
 
-    @ManyToMany(mappedBy = "turmas", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "turmas", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Aluno> alunos;
 
 
-    @OneToOne(mappedBy = "turma", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "turma", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Sala sala;
     public Professor getProfessor() {
         return professor;
@@ -57,6 +57,6 @@ public class Turma {
     @Override
     public String toString() {
         return "Turma [codTurma=" + codTurma + ", getProfessor()=" + getProfessor() + ", getAlunos()=" + getAlunos()
-                + ", getSala()=" + getSala() + "]\n";
+                + ", NroSala=" + getSala().getNroSala() + "]\n";
     }
 }

@@ -22,7 +22,7 @@ public class Aluno {
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento; //LocalDate serve para guardar datas
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "turmas_alunos",
                 joinColumns = @JoinColumn(name = "aluno_fk", referencedColumnName = "matricula"),
                 inverseJoinColumns = @JoinColumn(name = "turma_fk", referencedColumnName = "cod_turma"))

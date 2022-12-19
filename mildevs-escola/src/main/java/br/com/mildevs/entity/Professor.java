@@ -27,7 +27,7 @@ public class Professor {
     @Column(nullable = false)
     private String disciplina;
 
-    @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Turma> turmas;
 
 

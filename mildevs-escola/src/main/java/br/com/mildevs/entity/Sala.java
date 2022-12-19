@@ -2,6 +2,8 @@ package br.com.mildevs.entity;
 
 import jakarta.persistence.*;
 
+import java.lang.reflect.Type;
+
 @Entity
 public class Sala {
 
@@ -19,7 +21,7 @@ public class Sala {
     @Column(nullable = false)
     private double altura;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "turma_fk", referencedColumnName = "cod_turma")
     private Turma turma;
 
@@ -62,4 +64,6 @@ public class Sala {
     public void setAltura(double altura) {
         this.altura = altura;
     }
+
+
 }
